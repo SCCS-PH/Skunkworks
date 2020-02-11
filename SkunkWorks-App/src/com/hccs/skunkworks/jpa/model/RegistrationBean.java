@@ -8,13 +8,17 @@ package com.hccs.skunkworks.jpa.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +43,8 @@ public class RegistrationBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(generator = "registration_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "registration_sequence", sequenceName = "registration_sequence", allocationSize = 1)
     @Basic(optional = false)
     @Column(name = "registrationid")
     private Integer registrationid;
@@ -56,10 +62,10 @@ public class RegistrationBean implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @JoinColumn(name = "machineid", referencedColumnName = "machineid")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private MachineBean machineid;
     @JoinColumn(name = "personid", referencedColumnName = "personid")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private PersonBean personid;
 
     public RegistrationBean() {
@@ -155,7 +161,7 @@ public class RegistrationBean implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hccs.skunkworks.application.jpa.RegistrationBean[ registrationid=" + registrationid + " ]";
+        return "registrationid=" + registrationid;
     }
-    
+
 }

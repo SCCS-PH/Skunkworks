@@ -31,7 +31,7 @@ public class Postgre implements IConnection {
         properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
         properties.put("eclipselink.logging.level", "OFF");
 
-        emf = Persistence.createEntityManagerFactory("SkunkWorks-ViewerPU", properties);
+        emf = Persistence.createEntityManagerFactory("SkunkWorks-AppPU", properties);
         System.out.println("DataBase at " + host);
     }
 
