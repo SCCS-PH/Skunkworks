@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="SkunkWorks-AppPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.hccs.skunkworks.jpa.model.PersonBean</class>
+    <class>com.hccs.skunkworks.jpa.model.MachineBean</class>
+    <class>com.hccs.skunkworks.jpa.model.RegistrationBean</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-184-72-236-57.compute-1.amazonaws.com:5432/d8ja9cf4il3g2l?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+      <property name="javax.persistence.jdbc.user" value="vlfetuqjfwpdcm"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="32e850804a1719eb0ee009950f14d1edc657bd78ce4f2aaca901ad50b0401365"/>
+    </properties>
+  </persistence-unit>
+</persistence>
