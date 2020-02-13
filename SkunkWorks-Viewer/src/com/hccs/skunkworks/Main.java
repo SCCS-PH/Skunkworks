@@ -56,15 +56,10 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JOptionPane.showMessageDialog(null, "Hello World!");
                 SkunkWorkController skw = new SkunkWorkController();
-                
-//                ActivatorController ac = new ActivatorController();
-//                ac.showForm();
+                skw.showForm();
             }
         });
-
-        System.out.println("Hello World!");
     }
 
     public static ResourceBundle getResourceBundle() {
