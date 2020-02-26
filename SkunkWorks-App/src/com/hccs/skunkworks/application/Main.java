@@ -16,7 +16,6 @@ public class Main {
 
         Long startTime = System.nanoTime();
         SkunkWorkController sk = new SkunkWorkController();
-        sk.start();
         sk.checkAndSave();
 
         System.out.println("TimeA: "

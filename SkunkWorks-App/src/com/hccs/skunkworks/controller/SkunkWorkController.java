@@ -1,6 +1,5 @@
 package com.hccs.skunkworks.controller;
 
-import com.hccs.skunkworks.application.Main;
 import com.hccs.skunkworks.jpa.controllers.RegistrationQuries;
 import com.hccs.skunkworks.jpa.model.MachineBean;
 import com.hccs.skunkworks.jpa.model.PersonBean;
@@ -8,7 +7,6 @@ import com.hccs.skunkworks.jpa.model.RegistrationBean;
 import com.hccs.util.ComputerInfo;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.prefs.Preferences;
 
 /**
@@ -17,15 +15,19 @@ import java.util.prefs.Preferences;
  */
 public class SkunkWorkController {
 
+    private int controlId;
     private Preferences preferences;
     private RegistrationQuries regQuries;
     private String computerName, userName,
             productName, motherBoardSN, mcAddress,
             hdSN, osInfo, javaInfo, externalIP;
+    private final String STRING_VALUE = "controlid";
 
     public SkunkWorkController() {
         preferences = Preferences.userRoot().node(this.getClass().getName());
+        controlId = preferences.getInt(STRING_VALUE, -1);
         regQuries = new RegistrationQuries();
+
         ComputerInfo id = new ComputerInfo();
 
         computerName = id.getComputerName();
@@ -44,21 +46,11 @@ public class SkunkWorkController {
         System.out.println("MotherBoardSN: " + motherBoardSN);
         System.out.println("HardDisk: " + hdSN);
         System.out.println("IP: " + externalIP);
-
-        try {
-            List<RegistrationBean> regList = regQuries.findAllAccount();
-            System.out.println("Size: " + regList.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void start() {
         try {
-            List<RegistrationBean> regList = regQuries.findAllAccount();
-            System.out.println("Size: " + regList.size());
-
-            RegistrationBean bean = regQuries.getRegistrationById(preferences.getInt("controlid", 0));
+            RegistrationBean bean = regQuries.getRegistrationById(controlId);
             if (bean != null) {
                 System.out.println("Retrieve: " + bean.toString());
             }
@@ -68,6 +60,23 @@ public class SkunkWorkController {
     }
 
     public void checkAndSave() {
+
+        if (controlId > 0) {
+            RegistrationBean bean = regQuries.getRegistrationById(controlId);
+            bean.setLastlogin(new Date());
+            try {
+                regQuries.save(bean);
+                System.out.println("Last Loging Update...");
+            } catch (Exception e) {
+                System.out.println("Failed to update Last Login!");
+            }
+
+        } else {
+            createNewDevice();
+        }
+    }
+
+    private void createNewDevice() {
         MachineBean mBean = new MachineBean();
         mBean.setComputername(computerName);
         mBean.setHarddisk(hdSN);
