@@ -3,6 +3,7 @@ package com.hccs.skunkworks.jpa.models;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -51,10 +52,10 @@ public class RegistrationBean implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @JoinColumn(name = "machineid", referencedColumnName = "machineid")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private MachineBean machineid;
     @JoinColumn(name = "personid", referencedColumnName = "personid")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private PersonBean personid;
 
     public RegistrationBean() {

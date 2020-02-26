@@ -28,6 +28,7 @@ public class SkunkWorkController {
     private ATYPE aType;
     private MainFrame form;
     private Preferences preferences;
+    private RegistrationBean selectedRegBean;
     private RegistrationQuries regQuries;
     private RegistrationTableModel regTModel;
 
@@ -73,6 +74,7 @@ public class SkunkWorkController {
 
     public SkunkWorkController() {
         form = new MainFrame();
+        regQuries = new RegistrationQuries();
         regTModel = new RegistrationTableModel();
         preferences = Preferences.userRoot().node(this.getClass().getName());
 
@@ -100,17 +102,18 @@ public class SkunkWorkController {
                 ListSelectionModel lsm = (ListSelectionModel) e.getSource();
                 form.toggleButtons(false);
                 setRegistrationDetails(null);
-                RegistrationBean regBean;
 
                 if (!lsm.isSelectionEmpty()) {
                     List<Integer> rows = form.getSelectedRowsModel();
                     if (rows.size() == 1) {
-                        regBean = (RegistrationBean) regTModel.getWrapperObject(rows.get(0));
-                        if (regBean != null) {
-                            String name = regBean.toString();
+                        selectedRegBean = (RegistrationBean) regTModel.getWrapperObject(rows.get(0));
+                        if (selectedRegBean != null) {
+                            String name = selectedRegBean.toString();
                             System.out.println("Name: " + name);
-                            setRegistrationDetails(regBean);
+                            setRegistrationDetails(selectedRegBean);
                         }
+                    } else {
+                        selectedRegBean = null;
                     }
                     form.toggleButtons(!rows.isEmpty());
                 }
@@ -135,13 +138,28 @@ public class SkunkWorkController {
             }
         });
 
-        regQuries = new RegistrationQuries();
-        try {
-            List<RegistrationBean> regList = regQuries.findAllAccount();
-            System.out.println("Size: " + regList.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        form.btnSavePersonDetails((e) -> {
+            if ("Save".equalsIgnoreCase(form.getSaveButtonText())) {
+                System.out.println("Saving...");
+                savePersonDetails();
+                form.setPersonDetailEditable(false);
+            } else {
+                form.setPersonDetailEditable(true);
+            }
+        });
+
+        form.btnCancelActionListener((e) -> {
+            if (selectedRegBean != null) {
+                setRegistrationDetails(selectedRegBean);
+            }
+        });
+
+//        try {
+//            List<RegistrationBean> regList = regQuries.findAllAccount();
+//            System.out.println("Size: " + regList.size());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void processActivatorAccounts() {
@@ -234,6 +252,7 @@ public class SkunkWorkController {
             form.setProfileInfo("");
             form.setHDInfo("");
             form.setMotherBoradInfo("");
+            form.setSaveButtonEnable(false);
             return;
         }
 
@@ -252,6 +271,7 @@ public class SkunkWorkController {
             form.setEmailAddInfo(pBean.getEmail());
             String ipAdd = pBean.getLocation();
             form.setIPAddInfo(ipAdd);
+            form.setSaveButtonEnable(true);
         }
 
         form.setOSInfo(mBean.getOsversion());
@@ -260,6 +280,25 @@ public class SkunkWorkController {
         form.setProfileInfo(mBean.getProfilename());
         form.setHDInfo(mBean.getHarddisk());
         form.setMotherBoradInfo(mBean.getMotherboard());
+    }
+
+    private void savePersonDetails() {
+        if (selectedRegBean == null) {
+            return;
+        }
+
+        PersonBean p = selectedRegBean.getPersonid();
+        p.setName(form.getFullName());
+        p.setPhonenumber(form.getPhoneInfo());
+        p.setEmail(form.getEmailAddress());
+
+        try {
+            regQuries.save(selectedRegBean);
+            System.out.println("success!");
+        } catch (Exception e) {
+            System.out.println("failed!");
+        }
+
     }
 
     public void showForm() {

@@ -39,6 +39,26 @@ public class MainFrame extends javax.swing.JFrame {
         btnFetchAll.addActionListener(a);
     }
 
+    public void btnCancelActionListener(ActionListener a) {
+        btnCancel.addActionListener(a);
+    }
+
+    public void btnSavePersonDetails(ActionListener a) {
+        btnStartEdit.addActionListener(a);
+    }
+
+    public String getFullName() {
+        return txtFullName.getText().trim();
+    }
+
+    public String getPhoneInfo() {
+        return txtPhone.getText().trim();
+    }
+
+    public String getEmailAddress() {
+        return txtEmailAdd.getText().trim();
+    }
+
     public void setFullName(String val) {
         txtFullName.setText(val);
     }
@@ -59,7 +79,6 @@ public class MainFrame extends javax.swing.JFrame {
         txtIPAdd.setText(val);
         btnChecker1.setEnabled(!val.isEmpty());
         btnChecker2.setEnabled(!val.isEmpty());
-
     }
 
     public void setOSInfo(String val) {
@@ -159,6 +178,9 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel21 = new javax.swing.JPanel();
         btnChecker1 = new javax.swing.JButton();
         btnChecker2 = new javax.swing.JButton();
+        jPanel25 = new javax.swing.JPanel();
+        btnCancel = new javax.swing.JButton();
+        btnStartEdit = new javax.swing.JButton();
         pnlPlugins = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -203,14 +225,14 @@ public class MainFrame extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         toggleButtonGroup.add(btnFetchAll);
-        btnFetchAll.setText("Fetch All");
+        btnFetchAll.setText("Fetch All Device");
         btnFetchAll.setFocusable(false);
         btnFetchAll.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFetchAll.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnFetchAll);
 
         toggleButtonGroup.add(jToggleButton2);
-        jToggleButton2.setText("New Account");
+        jToggleButton2.setText("Newly Added Device");
         jToggleButton2.setFocusable(false);
         jToggleButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -280,7 +302,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5.setText("HardDisk SN:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -291,7 +313,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtHD.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -304,7 +326,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel6.setText("MotherBoard SN:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -315,7 +337,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtMobo.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -400,7 +422,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtJava.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -413,7 +435,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel10.setText("Java Version:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -424,7 +446,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtOS.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -437,7 +459,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel11.setText("Operating System:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -448,7 +470,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtIPAdd.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -461,7 +483,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel12.setText("Public IP:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -472,7 +494,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtProfile.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -485,7 +507,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel13.setText("Profile Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -496,7 +518,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtComputer.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 20;
@@ -509,7 +531,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel14.setText("Computer Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 1;
@@ -539,11 +561,41 @@ public class MainFrame extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel12.add(jPanel21, gridBagConstraints);
+
+        jPanel25.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 0));
+
+        btnCancel.setText("Cancel");
+        btnCancel.setEnabled(false);
+        btnCancel.setMaximumSize(new java.awt.Dimension(100, 25));
+        btnCancel.setMinimumSize(new java.awt.Dimension(80, 25));
+        btnCancel.setPreferredSize(new java.awt.Dimension(90, 25));
+        btnCancel.setVisible(false);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel25.add(btnCancel);
+
+        btnStartEdit.setText("Start Edit");
+        btnStartEdit.setEnabled(false);
+        btnStartEdit.setMaximumSize(new java.awt.Dimension(100, 25));
+        btnStartEdit.setMinimumSize(new java.awt.Dimension(80, 25));
+        btnStartEdit.setPreferredSize(new java.awt.Dimension(90, 25));
+        jPanel25.add(btnStartEdit);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel12.add(jPanel25, gridBagConstraints);
 
         jPanel19.add(jPanel12, java.awt.BorderLayout.NORTH);
 
@@ -689,11 +741,17 @@ public class MainFrame extends javax.swing.JFrame {
         ActivatorUtility.openLink("http://www.ip-tracker.org/locator/ip-lookup.php?ip=" + txtIPAdd.getText());
     }//GEN-LAST:event_btnChecker2ActionPerformed
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        setPersonDetailEditable(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnChecker1;
     private javax.swing.JButton btnChecker2;
     private javax.swing.JToggleButton btnFetchAll;
+    private javax.swing.JButton btnStartEdit;
     private javax.swing.JCheckBox chkEmailNoti;
     private javax.swing.JSplitPane detailsSplitPane;
     private com.hccs.forms.components.ZDatePicker dpExpiration;
@@ -728,6 +786,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -820,6 +879,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
         return rows;
+    }
+
+    public void setSaveButtonEnable(boolean b) {
+        btnStartEdit.setEnabled(b);
+    }
+
+    public String getSaveButtonText() {
+        return btnStartEdit.getText();
+    }
+
+    public void setPersonDetailEditable(boolean b) {
+        btnStartEdit.setText(b ? "Save" : "Start Edit");
+        txtFullName.setEditable(b);
+        txtPhone.setEditable(b);
+        txtEmailAdd.setEditable(b);
+        btnCancel.setVisible(b);
+        btnCancel.setEnabled(b);
     }
 
 }
