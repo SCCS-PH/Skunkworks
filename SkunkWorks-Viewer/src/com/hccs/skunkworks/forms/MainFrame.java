@@ -197,8 +197,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         dpExpiration = new com.hccs.forms.components.ZDatePicker("MM-dd-yyyy","##-##-####",'_');
-        jPanel10 = new javax.swing.JPanel();
-        chkEmailNoti = new javax.swing.JCheckBox();
         listSelectorPanel1 = new com.hccs.forms.components.ListSelectorPanel();
         pnlStatus = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
@@ -653,13 +651,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel18.add(pnlExpiration, java.awt.BorderLayout.CENTER);
 
         pnlPlugins.add(jPanel18, java.awt.BorderLayout.NORTH);
-
-        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0));
-
-        chkEmailNoti.setText("Send Email Notification");
-        jPanel10.add(chkEmailNoti);
-
-        pnlPlugins.add(jPanel10, java.awt.BorderLayout.SOUTH);
         pnlPlugins.add(listSelectorPanel1, java.awt.BorderLayout.CENTER);
 
         detailsSplitPane.setRightComponent(pnlPlugins);
@@ -752,7 +743,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnChecker2;
     private javax.swing.JToggleButton btnFetchAll;
     private javax.swing.JButton btnStartEdit;
-    private javax.swing.JCheckBox chkEmailNoti;
     private javax.swing.JSplitPane detailsSplitPane;
     private com.hccs.forms.components.ZDatePicker dpExpiration;
     private javax.swing.JLabel jLabel1;
@@ -775,7 +765,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
