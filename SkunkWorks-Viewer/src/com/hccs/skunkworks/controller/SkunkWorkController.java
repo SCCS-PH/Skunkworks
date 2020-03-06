@@ -7,6 +7,7 @@ import com.hccs.skunkworks.jpa.controllers.RegistrationQuries;
 import com.hccs.skunkworks.jpa.models.MachineBean;
 import com.hccs.skunkworks.jpa.models.RegistrationBean;
 import com.hccs.skunkworks.jpa.models.PersonBean;
+import com.hccs.skunkworks.model.DirtyWorkBean;
 import com.hccs.util.DateUtilities;
 import com.hccs.util.StringUtilities;
 import com.hccs.util.Task;
@@ -31,6 +32,8 @@ public class SkunkWorkController {
     private RegistrationBean selectedRegBean;
     private RegistrationQuries regQuries;
     private RegistrationTableModel regTModel;
+    private final List<DirtyWorkBean> dirtyWorks
+            = DirtyWorkController.INSTANCE.getAllDirtyWorks();
 
     private enum ATYPE {
 
@@ -264,6 +267,7 @@ public class SkunkWorkController {
 //        form.setProductInfo(bean.getProductid().toString());
         form.setExpirationDate(sdf.format(bean.getExpirationdate()));
         form.setLastLoginDate(bean.getLastlogin() != null ? sdf.format(bean.getLastlogin()) : "");
+        form.populateDirtyWorks(dirtyWorks);
 
         if (pBean != null) {
             form.setFullName(pBean.getName());
@@ -271,6 +275,7 @@ public class SkunkWorkController {
             form.setEmailAddInfo(pBean.getEmail());
             String ipAdd = pBean.getLocation();
             form.setIPAddInfo(ipAdd);
+            form.toggleButtons(true);
             form.setSaveButtonEnable(true);
         }
 

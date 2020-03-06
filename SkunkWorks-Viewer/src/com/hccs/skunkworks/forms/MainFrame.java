@@ -1,6 +1,7 @@
 package com.hccs.skunkworks.forms;
 
 import com.hccs.skunkworks.forms.tablemodels.RegistrationTableModel;
+import com.hccs.skunkworks.model.DirtyWorkBean;
 import com.hccs.util.activator.ActivatorUtility;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -121,6 +122,22 @@ public class MainFrame extends javax.swing.JFrame {
         dpExpiration.setDate(date);
     }
 
+    public void populateDirtyWorks(List<DirtyWorkBean> list) {
+        lstdirtyWorks.setAvailableValues(list.toArray(new DirtyWorkBean[list.size()]));
+    }
+
+    public void setSelectedDirtyWorks(List<DirtyWorkBean> list) {
+        lstdirtyWorks.setSelectedValues(list.toArray(new DirtyWorkBean[list.size()]));
+    }
+
+    public void clearSelectedDirtyWorks() {
+        lstdirtyWorks.removeSelectedValues();
+    }
+
+    public void clearDirtyWorks() {
+        lstdirtyWorks.clear();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,7 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         dpExpiration = new com.hccs.forms.components.ZDatePicker("MM-dd-yyyy","##-##-####",'_');
-        listSelectorPanel1 = new com.hccs.forms.components.ListSelectorPanel();
+        lstdirtyWorks = new com.hccs.forms.components.ListSelectorPanel();
         pnlStatus = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -651,7 +668,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel18.add(pnlExpiration, java.awt.BorderLayout.CENTER);
 
         pnlPlugins.add(jPanel18, java.awt.BorderLayout.NORTH);
-        pnlPlugins.add(listSelectorPanel1, java.awt.BorderLayout.CENTER);
+        pnlPlugins.add(lstdirtyWorks, java.awt.BorderLayout.CENTER);
 
         detailsSplitPane.setRightComponent(pnlPlugins);
 
@@ -794,7 +811,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblStatus;
-    private com.hccs.forms.components.ListSelectorPanel listSelectorPanel1;
+    private com.hccs.forms.components.ListSelectorPanel lstdirtyWorks;
     private javax.swing.JMenu miAbout;
     private javax.swing.JMenuItem miExit;
     private javax.swing.JMenuBar mnuBar;
@@ -856,7 +873,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void toggleButtons(boolean b) {
-
+        lstdirtyWorks.toggleForm(b);
     }
 
     public List<Integer> getSelectedRowsModel() {
