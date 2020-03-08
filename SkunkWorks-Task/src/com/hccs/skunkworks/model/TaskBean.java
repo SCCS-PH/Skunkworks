@@ -8,6 +8,7 @@ public class TaskBean {
 
     private String taskName;
     private int taskValue;
+    private boolean active;
 
     public String getTaskName() {
         return taskName;
@@ -28,6 +29,14 @@ public class TaskBean {
     @Override
     public String toString() {
         return taskName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }
