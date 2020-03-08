@@ -1,7 +1,7 @@
 package com.hccs.skunkworks.jpa.controllers;
 
 
-import com.hccs.skunkworks.jpa.model.RegistrationBean;
+import com.hccs.skunkworks.jpa.models.RegistrationBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.hccs.skunkworks.jpa.model;
+package com.hccs.skunkworks.jpa.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "RegistrationBean.findByExpirationdate", query = "SELECT r FROM RegistrationBean r WHERE r.expirationdate = :expirationdate")
     , @NamedQuery(name = "RegistrationBean.findByLastlogin", query = "SELECT r FROM RegistrationBean r WHERE r.lastlogin = :lastlogin")
     , @NamedQuery(name = "RegistrationBean.findBySkunkwork", query = "SELECT r FROM RegistrationBean r WHERE r.skunkwork = :skunkwork")
-    , @NamedQuery(name = "RegistrationBean.findByActive", query = "SELECT r FROM RegistrationBean r WHERE r.active = :active")})
+    , @NamedQuery(name = "RegistrationBean.findByActive", query = "SELECT r FROM RegistrationBean r WHERE r.active = :active")
+    , @NamedQuery(name = "RegistrationBean.findByTaskvalue", query = "SELECT r FROM RegistrationBean r WHERE r.taskvalue = :taskvalue")})
 public class RegistrationBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,6 +57,8 @@ public class RegistrationBean implements Serializable {
     private Boolean skunkwork;
     @Column(name = "active")
     private Boolean active;
+    @Column(name = "taskvalue")
+    private Integer taskvalue;
     @JoinColumn(name = "machineid", referencedColumnName = "machineid")
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private MachineBean machineid;
@@ -118,6 +121,14 @@ public class RegistrationBean implements Serializable {
         this.active = active;
     }
 
+    public Integer getTaskvalue() {
+        return taskvalue;
+    }
+
+    public void setTaskvalue(Integer taskvalue) {
+        this.taskvalue = taskvalue;
+    }
+
     public MachineBean getMachineid() {
         return machineid;
     }
@@ -156,7 +167,7 @@ public class RegistrationBean implements Serializable {
 
     @Override
     public String toString() {
-        return "registrationid=" + registrationid;
+        return "com.hccs.skunkworks.jpa.models.RegistrationBean[ registrationid=" + registrationid + " ]";
     }
 
 }

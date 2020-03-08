@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.hccs.skunkworks.jpa.model;
+package com.hccs.skunkworks.jpa.models;
 
 import java.io.Serializable;
 import java.util.List;
@@ -156,7 +151,7 @@ public class MachineBean implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hccs.skunkworks.application.jpa.MachineBean[ machineid=" + machineid + " ]";
+        return "com.hccs.skunkworks.jpa.models.MachineBean[ machineid=" + machineid + " ]";
     }
 
 }
