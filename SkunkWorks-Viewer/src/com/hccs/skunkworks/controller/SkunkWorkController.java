@@ -8,6 +8,7 @@ import com.hccs.skunkworks.jpa.models.MachineBean;
 import com.hccs.skunkworks.jpa.models.RegistrationBean;
 import com.hccs.skunkworks.jpa.models.PersonBean;
 import com.hccs.skunkworks.model.TaskBean;
+import com.hccs.skunkworks.task.TaskController;
 import com.hccs.util.DateUtilities;
 import com.hccs.util.StringUtilities;
 import com.hccs.util.Task;
@@ -33,7 +34,7 @@ public class SkunkWorkController {
     private RegistrationQuries regQuries;
     private RegistrationTableModel regTModel;
     private final List<TaskBean> dirtyWorks
-            = DirtyWorkController.INSTANCE.getAllDirtyWorks();
+            = TaskController.INSTANCE.getAllDirtyTasks();
 
     private enum ATYPE {
 

@@ -137,12 +137,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void clearSelectedDirtyTasks() {
-        System.out.println("Remove..");
         lstdirtyTasks.removeSelectedValues();
     }
 
     public void clearDirtyTasks() {
-        System.out.println("clear??");
         lstdirtyTasks.clear();
     }
 

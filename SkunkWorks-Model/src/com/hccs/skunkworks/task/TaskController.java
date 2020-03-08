@@ -1,4 +1,4 @@
-package com.hccs.skunkworks.controller;
+package com.hccs.skunkworks.task;
 
 import com.hccs.skunkworks.model.TaskBean;
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import java.util.List;
  *
  * @author DCSalenga
  */
-public enum DirtyWorkController {
+public enum TaskController {
     INSTANCE;
 
     private final List<TaskBean> works = new ArrayList<>();
 
-    public List<TaskBean> getAllDirtyWorks() {
+    public List<TaskBean> getAllDirtyTasks() {
         if (!works.isEmpty()) {
             return works;
         }
