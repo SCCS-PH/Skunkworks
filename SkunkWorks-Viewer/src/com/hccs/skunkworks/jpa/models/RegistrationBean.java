@@ -57,6 +57,8 @@ public class RegistrationBean implements Serializable {
     @JoinColumn(name = "personid", referencedColumnName = "personid")
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private PersonBean personid;
+    @Column(name = "taskvalue")
+    private Integer taskvalue;
 
     public RegistrationBean() {
     }
@@ -149,9 +151,17 @@ public class RegistrationBean implements Serializable {
         return true;
     }
 
+    public Integer getTaskvalue() {
+        return taskvalue;
+    }
+
+    public void setTaskvalue(Integer taskvalue) {
+        this.taskvalue = taskvalue;
+    }
+
     @Override
     public String toString() {
         return "com.hccs.skunkworks.jpa.RegistrationBean[ registrationid=" + registrationid + " ]";
     }
-    
+
 }

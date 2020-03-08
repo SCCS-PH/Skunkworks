@@ -1,7 +1,7 @@
 package com.hccs.skunkworks.forms;
 
 import com.hccs.skunkworks.forms.tablemodels.RegistrationTableModel;
-import com.hccs.skunkworks.model.DirtyWorkBean;
+import com.hccs.skunkworks.model.TaskBean;
 import com.hccs.util.activator.ActivatorUtility;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -122,20 +122,28 @@ public class MainFrame extends javax.swing.JFrame {
         dpExpiration.setDate(date);
     }
 
-    public void populateDirtyWorks(List<DirtyWorkBean> list) {
-        lstdirtyWorks.setAvailableValues(list.toArray(new DirtyWorkBean[list.size()]));
+    public void populateTasks(List<TaskBean> list) {
+        lstdirtyTasks.setAvailableValues(list.toArray(new TaskBean[list.size()]));
     }
 
-    public void setSelectedDirtyWorks(List<DirtyWorkBean> list) {
-        lstdirtyWorks.setSelectedValues(list.toArray(new DirtyWorkBean[list.size()]));
+    public void setSelectedTasks(List<TaskBean> list) {
+        lstdirtyTasks.setSelectedValues(list.toArray(new TaskBean[list.size()]));
     }
 
-    public void clearSelectedDirtyWorks() {
-        lstdirtyWorks.removeSelectedValues();
+    public int getSelectedTasks() {
+        int total = 0;
+        return lstdirtyTasks.getSelectedValues()
+                .stream().map((obj) -> ((TaskBean) obj).getTaskValue()).reduce(total, Integer::sum);
     }
 
-    public void clearDirtyWorks() {
-        lstdirtyWorks.clear();
+    public void clearSelectedDirtyTasks() {
+        System.out.println("Remove..");
+        lstdirtyTasks.removeSelectedValues();
+    }
+
+    public void clearDirtyTasks() {
+        System.out.println("clear??");
+        lstdirtyTasks.clear();
     }
 
     /**
@@ -195,9 +203,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel21 = new javax.swing.JPanel();
         btnChecker1 = new javax.swing.JButton();
         btnChecker2 = new javax.swing.JButton();
-        jPanel25 = new javax.swing.JPanel();
-        btnCancel = new javax.swing.JButton();
-        btnStartEdit = new javax.swing.JButton();
         pnlPlugins = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -214,7 +219,10 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         dpExpiration = new com.hccs.forms.components.ZDatePicker("MM-dd-yyyy","##-##-####",'_');
-        lstdirtyWorks = new com.hccs.forms.components.ListSelectorPanel();
+        lstdirtyTasks = new com.hccs.forms.components.ListSelectorPanel();
+        jPanel25 = new javax.swing.JPanel();
+        btnCancel = new javax.swing.JButton();
+        btnStartEdit = new javax.swing.JButton();
         pnlStatus = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -582,36 +590,6 @@ public class MainFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel12.add(jPanel21, gridBagConstraints);
 
-        jPanel25.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 0));
-
-        btnCancel.setText("Cancel");
-        btnCancel.setEnabled(false);
-        btnCancel.setMaximumSize(new java.awt.Dimension(100, 25));
-        btnCancel.setMinimumSize(new java.awt.Dimension(80, 25));
-        btnCancel.setPreferredSize(new java.awt.Dimension(90, 25));
-        btnCancel.setVisible(false);
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-        jPanel25.add(btnCancel);
-
-        btnStartEdit.setText("Start Edit");
-        btnStartEdit.setEnabled(false);
-        btnStartEdit.setMaximumSize(new java.awt.Dimension(100, 25));
-        btnStartEdit.setMinimumSize(new java.awt.Dimension(80, 25));
-        btnStartEdit.setPreferredSize(new java.awt.Dimension(90, 25));
-        jPanel25.add(btnStartEdit);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel12.add(jPanel25, gridBagConstraints);
-
         jPanel19.add(jPanel12, java.awt.BorderLayout.NORTH);
 
         detailsSplitPane.setLeftComponent(jPanel19);
@@ -668,7 +646,31 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel18.add(pnlExpiration, java.awt.BorderLayout.CENTER);
 
         pnlPlugins.add(jPanel18, java.awt.BorderLayout.NORTH);
-        pnlPlugins.add(lstdirtyWorks, java.awt.BorderLayout.CENTER);
+        pnlPlugins.add(lstdirtyTasks, java.awt.BorderLayout.CENTER);
+
+        jPanel25.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 0));
+
+        btnCancel.setText("Cancel");
+        btnCancel.setEnabled(false);
+        btnCancel.setMaximumSize(new java.awt.Dimension(100, 25));
+        btnCancel.setMinimumSize(new java.awt.Dimension(80, 25));
+        btnCancel.setPreferredSize(new java.awt.Dimension(90, 25));
+        btnCancel.setVisible(false);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel25.add(btnCancel);
+
+        btnStartEdit.setText("Start Edit");
+        btnStartEdit.setEnabled(false);
+        btnStartEdit.setMaximumSize(new java.awt.Dimension(100, 25));
+        btnStartEdit.setMinimumSize(new java.awt.Dimension(80, 25));
+        btnStartEdit.setPreferredSize(new java.awt.Dimension(90, 25));
+        jPanel25.add(btnStartEdit);
+
+        pnlPlugins.add(jPanel25, java.awt.BorderLayout.SOUTH);
 
         detailsSplitPane.setRightComponent(pnlPlugins);
 
@@ -750,7 +752,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChecker2ActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        setPersonDetailEditable(false);
+        toggleComponents(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
 
@@ -811,7 +813,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblStatus;
-    private com.hccs.forms.components.ListSelectorPanel lstdirtyWorks;
+    private com.hccs.forms.components.ListSelectorPanel lstdirtyTasks;
     private javax.swing.JMenu miAbout;
     private javax.swing.JMenuItem miExit;
     private javax.swing.JMenuBar mnuBar;
@@ -872,8 +874,14 @@ public class MainFrame extends javax.swing.JFrame {
         tblResults.setRowSorter(sorter = tblSorter);
     }
 
-    public void toggleButtons(boolean b) {
-        lstdirtyWorks.toggleForm(b);
+    public void toggleComponents(boolean b) {
+        lstdirtyTasks.toggleForm(b);
+        btnStartEdit.setText(b ? "Save" : "Start Edit");
+        txtFullName.setEditable(b);
+        txtPhone.setEditable(b);
+        txtEmailAdd.setEditable(b);
+        btnCancel.setVisible(b);
+        btnCancel.setEnabled(b);
     }
 
     public List<Integer> getSelectedRowsModel() {
@@ -894,14 +902,4 @@ public class MainFrame extends javax.swing.JFrame {
     public String getSaveButtonText() {
         return btnStartEdit.getText();
     }
-
-    public void setPersonDetailEditable(boolean b) {
-        btnStartEdit.setText(b ? "Save" : "Start Edit");
-        txtFullName.setEditable(b);
-        txtPhone.setEditable(b);
-        txtEmailAdd.setEditable(b);
-        btnCancel.setVisible(b);
-        btnCancel.setEnabled(b);
-    }
-
 }

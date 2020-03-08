@@ -1,6 +1,6 @@
 package com.hccs.skunkworks.controller;
 
-import com.hccs.skunkworks.model.DirtyWorkBean;
+import com.hccs.skunkworks.model.TaskBean;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,41 +11,41 @@ import java.util.List;
 public enum DirtyWorkController {
     INSTANCE;
 
-    private final List<DirtyWorkBean> works = new ArrayList<>();
+    private final List<TaskBean> works = new ArrayList<>();
 
-    public List<DirtyWorkBean> getAllDirtyWorks() {
+    public List<TaskBean> getAllDirtyWorks() {
         if (!works.isEmpty()) {
             return works;
         }
 
-        DirtyWorkBean dw = new DirtyWorkBean();
-        dw.setdWName("Sample A");
-        dw.setdWValue(1);
+        TaskBean dw = new TaskBean();
+        dw.setTaskName("Sample A");
+        dw.setTaskValue(1);
         works.add(dw);
 
-        dw = new DirtyWorkBean();
-        dw.setdWName("Sample B");
-        dw.setdWValue(2);
+        dw = new TaskBean();
+        dw.setTaskName("Sample B");
+        dw.setTaskValue(2);
         works.add(dw);
 
-        dw = new DirtyWorkBean();
-        dw.setdWName("Sample C");
-        dw.setdWValue(4);
+        dw = new TaskBean();
+        dw.setTaskName("Sample C");
+        dw.setTaskValue(4);
         works.add(dw);
 
-        dw = new DirtyWorkBean();
-        dw.setdWName("Sample D");
-        dw.setdWValue(8);
+        dw = new TaskBean();
+        dw.setTaskName("Sample D");
+        dw.setTaskValue(8);
         works.add(dw);
 
-        dw = new DirtyWorkBean();
-        dw.setdWName("Sample E");
-        dw.setdWValue(0x10);
+        dw = new TaskBean();
+        dw.setTaskName("Sample E");
+        dw.setTaskValue(0x10);
         works.add(dw);
 
-        dw = new DirtyWorkBean();
-        dw.setdWName("Sample F");
-        dw.setdWValue(0x20);
+        dw = new TaskBean();
+        dw.setTaskName("Sample F");
+        dw.setTaskValue(0x20);
         works.add(dw);
 
         return works;

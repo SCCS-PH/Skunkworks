@@ -7,7 +7,7 @@ import com.hccs.skunkworks.jpa.controllers.RegistrationQuries;
 import com.hccs.skunkworks.jpa.models.MachineBean;
 import com.hccs.skunkworks.jpa.models.RegistrationBean;
 import com.hccs.skunkworks.jpa.models.PersonBean;
-import com.hccs.skunkworks.model.DirtyWorkBean;
+import com.hccs.skunkworks.model.TaskBean;
 import com.hccs.util.DateUtilities;
 import com.hccs.util.StringUtilities;
 import com.hccs.util.Task;
@@ -32,7 +32,7 @@ public class SkunkWorkController {
     private RegistrationBean selectedRegBean;
     private RegistrationQuries regQuries;
     private RegistrationTableModel regTModel;
-    private final List<DirtyWorkBean> dirtyWorks
+    private final List<TaskBean> dirtyWorks
             = DirtyWorkController.INSTANCE.getAllDirtyWorks();
 
     private enum ATYPE {
@@ -57,7 +57,7 @@ public class SkunkWorkController {
         LOADING {
             @Override
             public String toString() {
-                return "Loading Messages...";
+                return "Loading Devices...";
             }
         },
         ACTIVATE {
@@ -103,7 +103,7 @@ public class SkunkWorkController {
                     return;
                 }
                 ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-                form.toggleButtons(false);
+                form.toggleComponents(false);
                 setRegistrationDetails(null);
 
                 if (!lsm.isSelectionEmpty()) {
@@ -118,7 +118,6 @@ public class SkunkWorkController {
                     } else {
                         selectedRegBean = null;
                     }
-                    form.toggleButtons(!rows.isEmpty());
                 }
             }
         });
@@ -145,9 +144,9 @@ public class SkunkWorkController {
             if ("Save".equalsIgnoreCase(form.getSaveButtonText())) {
                 System.out.println("Saving...");
                 savePersonDetails();
-                form.setPersonDetailEditable(false);
+                form.toggleComponents(false);
             } else {
-                form.setPersonDetailEditable(true);
+                form.toggleComponents(true);
             }
         });
 
@@ -255,6 +254,7 @@ public class SkunkWorkController {
             form.setProfileInfo("");
             form.setHDInfo("");
             form.setMotherBoradInfo("");
+            form.clearDirtyTasks();
             form.setSaveButtonEnable(false);
             return;
         }
@@ -263,11 +263,10 @@ public class SkunkWorkController {
         MachineBean mBean = bean.getMachineid();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
-//        form.populateAvailablePlugins(initAllPlugins());
-//        form.setProductInfo(bean.getProductid().toString());
         form.setExpirationDate(sdf.format(bean.getExpirationdate()));
         form.setLastLoginDate(bean.getLastlogin() != null ? sdf.format(bean.getLastlogin()) : "");
-        form.populateDirtyWorks(dirtyWorks);
+        form.populateTasks(dirtyWorks);
+        form.setSelectedTasks(getSelectedTask(bean.getTaskvalue() == null ? 0 : bean.getTaskvalue()));
 
         if (pBean != null) {
             form.setFullName(pBean.getName());
@@ -275,7 +274,6 @@ public class SkunkWorkController {
             form.setEmailAddInfo(pBean.getEmail());
             String ipAdd = pBean.getLocation();
             form.setIPAddInfo(ipAdd);
-            form.toggleButtons(true);
             form.setSaveButtonEnable(true);
         }
 
@@ -296,6 +294,7 @@ public class SkunkWorkController {
         p.setName(form.getFullName());
         p.setPhonenumber(form.getPhoneInfo());
         p.setEmail(form.getEmailAddress());
+        selectedRegBean.setTaskvalue(form.getSelectedTasks());
 
         try {
             regQuries.save(selectedRegBean);
@@ -304,6 +303,16 @@ public class SkunkWorkController {
             System.out.println("failed!");
         }
 
+    }
+
+    private List<TaskBean> getSelectedTask(Integer val) {
+        List<TaskBean> tb = new ArrayList<>();
+        for (TaskBean pb : dirtyWorks) {
+            if ((pb.getTaskValue() & val) == pb.getTaskValue()) {
+                tb.add(pb);
+            }
+        }
+        return tb;
     }
 
     public void showForm() {
