@@ -1,5 +1,4 @@
-
-package com.hccs.skunkworks.jpa.model;
+package com.hccs.skunkworks.jpa.models;
 
 import java.io.Serializable;
 import java.util.List;
@@ -130,7 +129,7 @@ public class PersonBean implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hccs.skunkworks.application.jpa.PersonBean[ personid=" + personid + " ]";
+        return "com.hccs.skunkworks.jpa.models.PersonBean[ personid=" + personid + " ]";
     }
 
 }

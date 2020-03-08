@@ -1,9 +1,9 @@
 package com.hccs.skunkworks.controller;
 
 import com.hccs.skunkworks.jpa.controllers.RegistrationQuries;
-import com.hccs.skunkworks.jpa.model.MachineBean;
-import com.hccs.skunkworks.jpa.model.PersonBean;
-import com.hccs.skunkworks.jpa.model.RegistrationBean;
+import com.hccs.skunkworks.jpa.models.MachineBean;
+import com.hccs.skunkworks.jpa.models.PersonBean;
+import com.hccs.skunkworks.jpa.models.RegistrationBean;
 import com.hccs.util.ComputerInfo;
 import java.util.Calendar;
 import java.util.Date;
