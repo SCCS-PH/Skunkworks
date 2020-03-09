@@ -15,8 +15,10 @@ import com.hccs.util.Task;
 import com.hccs.util.TaskThread;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.prefs.Preferences;
@@ -141,6 +143,8 @@ public class SkunkWorkController {
             }
         });
 
+        form.btnDeleteActionListener(deleteAction());
+
         form.btnSavePersonDetails((e) -> {
             if ("Save".equalsIgnoreCase(form.getSaveButtonText())) {
                 System.out.println("Saving...");
@@ -163,6 +167,56 @@ public class SkunkWorkController {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    private ActionListener deleteAction() {
+        return (ActionEvent e) -> {
+            final List<Integer> rows = form.getSelectedRowsModel();
+
+            if (!rows.isEmpty() && form.deleteConfirmation(rows.size() == 1)) {
+                new TaskThread(new Task() {
+                    RegistrationBean regBean;
+
+                    @Override
+                    public void start() {
+//                        form.toggleActivatorForm(false, true);
+                        form.setlabelStatus(STATUS.EMPTY_TRASH.toString());
+                    }
+
+                    @Override
+                    public void doInBackground() {
+                        List<Integer> tobedelete = new ArrayList<>();
+                        for (int row : rows) {
+                            try {
+                                regBean = (RegistrationBean) regTModel.getWrapperObject(row);
+                                if (regBean != null) {
+                                    if (regQuries.removeActivatorBean(regBean)) {
+                                        System.out.println("Account Deleted! " + regBean.getPersonid());
+                                        tobedelete.add(row);
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        if (!tobedelete.isEmpty()) {
+                            Collections.sort(tobedelete);
+                            for (int i = tobedelete.size() - 1; i >= 0; i--) {
+                                regTModel.removeRow(tobedelete.get(i));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void finished() {
+                        form.clearTableSelection();
+                        form.setRowCountLabel();
+                        form.setlabelStatus("");
+                    }
+                }).start();
+            }
+        };
     }
 
     private void processActivatorAccounts() {
@@ -337,6 +391,8 @@ public class SkunkWorkController {
                 preferences.getInt("y", 10));
         form.setSize(preferences.getInt("width", 950),
                 preferences.getInt("height", 600));
+        form.setJSHorizontalLocation(preferences.getInt("hdivider", 200));
+        form.setJSDetailLocation(preferences.getInt("splitdetail", 400));
     }
 
     private void closeApplication() {
@@ -352,6 +408,8 @@ public class SkunkWorkController {
         preferences.putInt("y", bounds.y);
         preferences.putInt("width", bounds.width);
         preferences.putInt("height", bounds.height);
+        preferences.putInt("hdivider", form.getJSHorizontalLocation());
+        preferences.putInt("splitdetail", form.getJSDetailLocation());
     }
 
     private int dateComparator(String o1, String o2) {

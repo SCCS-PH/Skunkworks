@@ -129,7 +129,7 @@ public class PersonBean implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hccs.skunkworks.jpa.models.PersonBean[ personid=" + personid + " ]";
+        return name;
     }
 
 }

@@ -40,6 +40,10 @@ public class MainFrame extends javax.swing.JFrame {
         btnFetchAll.addActionListener(a);
     }
 
+    public void btnDeleteActionListener(ActionListener a) {
+        btnDelete.addActionListener(a);
+    }
+
     public void btnCancelActionListener(ActionListener a) {
         btnCancel.addActionListener(a);
     }
@@ -144,6 +148,37 @@ public class MainFrame extends javax.swing.JFrame {
         lstdirtyTasks.clear();
     }
 
+    public int getJSHorizontalLocation() {
+        return jsHorizontal.getDividerLocation();
+    }
+
+    public void setJSHorizontalLocation(int val) {
+        jsHorizontal.setDividerLocation(val);
+    }
+
+    public int getJSDetailLocation() {
+        return detailsSplitPane.getDividerLocation();
+    }
+
+    public void setJSDetailLocation(int val) {
+        detailsSplitPane.setDividerLocation(val);
+    }
+
+    public void clearTableSelection() {
+        tblResults.clearSelection();
+        tblResults.repaint();
+    }
+
+    public boolean deleteConfirmation(boolean single) {
+        return (JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to DELETE "
+                + (single ? "this" : "these") + " request?"
+                + "\nNote: This action can not be undone",
+                "Deleting",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,8 +197,9 @@ public class MainFrame extends javax.swing.JFrame {
         btnFetchAll = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
+        btnDelete = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
-        jSplitPane2 = new javax.swing.JSplitPane();
+        jsHorizontal = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -254,6 +290,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         toggleButtonGroup.add(jToggleButton2);
         jToggleButton2.setText("Newly Added Device");
+        jToggleButton2.setEnabled(false);
         jToggleButton2.setFocusable(false);
         jToggleButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -261,10 +298,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         toggleButtonGroup.add(jToggleButton3);
         jToggleButton3.setText("Expiring Account");
+        jToggleButton3.setEnabled(false);
         jToggleButton3.setFocusable(false);
         jToggleButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jToggleButton3);
+
+        toggleButtonGroup.add(btnDelete);
+        btnDelete.setText("Delete Account");
+        btnDelete.setFocusable(false);
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDelete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnDelete);
 
         jPanel1.add(jToolBar1, java.awt.BorderLayout.CENTER);
 
@@ -272,7 +317,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jsHorizontal.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
@@ -309,7 +354,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7, java.awt.BorderLayout.SOUTH);
 
-        jSplitPane2.setLeftComponent(jPanel3);
+        jsHorizontal.setLeftComponent(jPanel3);
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
@@ -676,9 +721,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel4.add(jPanel17, java.awt.BorderLayout.CENTER);
 
-        jSplitPane2.setRightComponent(jPanel4);
+        jsHorizontal.setRightComponent(jPanel4);
 
-        jPanel2.add(jSplitPane2, java.awt.BorderLayout.CENTER);
+        jPanel2.add(jsHorizontal, java.awt.BorderLayout.CENTER);
 
         jSplitPane1.setRightComponent(jPanel2);
 
@@ -758,6 +803,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnChecker1;
     private javax.swing.JButton btnChecker2;
+    private javax.swing.JToggleButton btnDelete;
     private javax.swing.JToggleButton btnFetchAll;
     private javax.swing.JButton btnStartEdit;
     private javax.swing.JSplitPane detailsSplitPane;
@@ -802,7 +848,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
@@ -810,6 +855,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton6;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JSplitPane jsHorizontal;
     private javax.swing.JLabel lblStatus;
     private com.hccs.forms.components.ListSelectorPanel lstdirtyTasks;
     private javax.swing.JMenu miAbout;

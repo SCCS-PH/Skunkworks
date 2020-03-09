@@ -119,6 +119,7 @@
                           <ComponentRef name="toggleButtonGroup"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Newly Added Device"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                         <Property name="focusable" type="boolean" value="false"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -130,6 +131,18 @@
                           <ComponentRef name="toggleButtonGroup"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Expiring Account"/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
+                        <Property name="horizontalTextPosition" type="int" value="0"/>
+                        <Property name="verticalTextPosition" type="int" value="3"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JToggleButton" name="btnDelete">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="toggleButtonGroup"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Delete Account"/>
                         <Property name="focusable" type="boolean" value="false"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -148,7 +161,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JSplitPane" name="jSplitPane2">
+                <Container class="javax.swing.JSplitPane" name="jsHorizontal">
                   <Properties>
                     <Property name="orientation" type="int" value="0"/>
                   </Properties>
