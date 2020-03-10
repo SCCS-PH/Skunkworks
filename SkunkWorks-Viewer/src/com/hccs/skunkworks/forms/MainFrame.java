@@ -22,6 +22,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     public MainFrame() {
         initComponents();
+
+        cmbActive.removeAllItems();
+        cmbActive.addItem("TRUE");
+        cmbActive.addItem("FALSE");
+
     }
 
     public void addTableSelectionListener(ListSelectionListener l) {
@@ -68,8 +73,16 @@ public class MainFrame extends javax.swing.JFrame {
         txtFullName.setText(val);
     }
 
-    public void setProductInfo(String val) {
-        txtProductInfo.setText(val);
+    public void setActive(Boolean b) {
+        cmbActive.setSelectedItem(b != null ? b.toString().toUpperCase() : null);
+    }
+
+    public Object getSelectedActiveValue() {
+        return cmbActive.getSelectedItem();
+    }
+
+    public void clearSelectedActiveValue() {
+        cmbActive.setSelectedItem(null);
     }
 
     public void setPhoneInfo(String val) {
@@ -169,6 +182,14 @@ public class MainFrame extends javax.swing.JFrame {
         tblResults.repaint();
     }
 
+    public boolean getActiveValue() {
+        if (cmbActive.getSelectedItem() == null) {
+            return false;
+        } else {
+            return Boolean.parseBoolean((String) cmbActive.getSelectedItem());
+        }
+    }
+
     public boolean deleteConfirmation(boolean single) {
         return (JOptionPane.showConfirmDialog(
                 this,
@@ -208,7 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResults = new org.jdesktop.swingx.JXTable();
         jPanel7 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblRowCount = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         detailsSplitPane = new javax.swing.JSplitPane();
@@ -242,7 +263,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        txtProductInfo = new javax.swing.JTextField();
+        cmbActive = new javax.swing.JComboBox();
         jPanel24 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         txtLastLogin = new javax.swing.JTextField();
@@ -349,8 +370,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel2.setText("Row Count: ");
-        jPanel7.add(jLabel2);
+        lblRowCount.setText("Row Count: ");
+        jPanel7.add(lblRowCount);
 
         jPanel3.add(jPanel7, java.awt.BorderLayout.SOUTH);
 
@@ -646,17 +667,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel20.setLayout(new java.awt.GridLayout(0, 1));
 
-        jLabel16.setText("Product Info");
+        jLabel16.setText("Active");
         jPanel20.add(jLabel16);
 
-        txtProductInfo.setEditable(false);
-        jPanel20.add(txtProductInfo);
+        cmbActive.setEnabled(false);
+        jPanel20.add(cmbActive);
 
         jPanel9.add(jPanel20);
 
         jPanel24.setLayout(new java.awt.GridLayout(0, 1));
 
-        jLabel18.setText("Last Login");
+        jLabel18.setText("Last Seen");
         jPanel24.add(jLabel18);
 
         txtLastLogin.setEditable(false);
@@ -806,6 +827,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnDelete;
     private javax.swing.JToggleButton btnFetchAll;
     private javax.swing.JButton btnStartEdit;
+    private javax.swing.JComboBox cmbActive;
     private javax.swing.JSplitPane detailsSplitPane;
     private com.hccs.forms.components.ZDatePicker dpExpiration;
     private javax.swing.JLabel jLabel1;
@@ -818,7 +840,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -856,6 +877,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JSplitPane jsHorizontal;
+    private javax.swing.JLabel lblRowCount;
     private javax.swing.JLabel lblStatus;
     private com.hccs.forms.components.ListSelectorPanel lstdirtyTasks;
     private javax.swing.JMenu miAbout;
@@ -879,12 +901,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtMobo;
     private javax.swing.JTextField txtOS;
     private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtProductInfo;
     private javax.swing.JTextField txtProfile;
     // End of variables declaration//GEN-END:variables
 
     public void setRowCountLabel() {
-        lblStatus.setText("SettingCountLabel...");
+        lblRowCount.setText("Row Count: " + sorter.getViewRowCount());
+        lblStatus.setText("");
     }
 
     public void toggleForm(boolean b) {
@@ -926,6 +948,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtEmailAdd.setEditable(b);
         btnCancel.setVisible(b);
         btnCancel.setEnabled(b);
+        cmbActive.setEnabled(b);
     }
 
     public List<Integer> getSelectedRowsModel() {

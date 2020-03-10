@@ -264,7 +264,7 @@
                             <Property name="alignment" type="int" value="0"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel2">
+                            <Component class="javax.swing.JLabel" name="lblRowCount">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Row Count: "/>
                               </Properties>
@@ -615,13 +615,19 @@
                                               <SubComponents>
                                                 <Component class="javax.swing.JLabel" name="jLabel16">
                                                   <Properties>
-                                                    <Property name="text" type="java.lang.String" value="Product Info"/>
+                                                    <Property name="text" type="java.lang.String" value="Active"/>
                                                   </Properties>
                                                 </Component>
-                                                <Component class="javax.swing.JTextField" name="txtProductInfo">
+                                                <Component class="javax.swing.JComboBox" name="cmbActive">
                                                   <Properties>
-                                                    <Property name="editable" type="boolean" value="false"/>
+                                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                                      <StringArray count="0"/>
+                                                    </Property>
+                                                    <Property name="enabled" type="boolean" value="false"/>
                                                   </Properties>
+                                                  <AuxValues>
+                                                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+                                                  </AuxValues>
                                                 </Component>
                                               </SubComponents>
                                             </Container>
@@ -634,7 +640,7 @@
                                               <SubComponents>
                                                 <Component class="javax.swing.JLabel" name="jLabel18">
                                                   <Properties>
-                                                    <Property name="text" type="java.lang.String" value="Last Login"/>
+                                                    <Property name="text" type="java.lang.String" value="Last Seen"/>
                                                   </Properties>
                                                 </Component>
                                                 <Component class="javax.swing.JTextField" name="txtLastLogin">

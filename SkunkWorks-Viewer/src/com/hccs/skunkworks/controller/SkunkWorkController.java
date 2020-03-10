@@ -148,7 +148,7 @@ public class SkunkWorkController {
         form.btnSavePersonDetails((e) -> {
             if ("Save".equalsIgnoreCase(form.getSaveButtonText())) {
                 System.out.println("Saving...");
-                savePersonDetails();
+                saveRegistrationDetails();
                 form.toggleComponents(false);
             } else {
                 form.toggleComponents(true);
@@ -296,7 +296,6 @@ public class SkunkWorkController {
 
     private void setRegistrationDetails(RegistrationBean bean) {
         if (bean == null) {
-            form.setProductInfo("");
             form.setExpirationDate("");
             form.setLastLoginDate("");
             form.setFullName("");
@@ -311,6 +310,7 @@ public class SkunkWorkController {
             form.setMotherBoradInfo("");
             form.clearDirtyTasks();
             form.setSaveButtonEnable(false);
+            form.clearSelectedActiveValue();
             return;
         }
 
@@ -318,6 +318,7 @@ public class SkunkWorkController {
         MachineBean mBean = bean.getMachineid();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
+        form.setActive(bean.getActive());
         form.setExpirationDate(sdf.format(bean.getExpirationdate()));
         form.setLastLoginDate(bean.getLastlogin() != null ? sdf.format(bean.getLastlogin()) : "");
         form.populateTasks(dirtyWorks);
@@ -340,7 +341,7 @@ public class SkunkWorkController {
         form.setMotherBoradInfo(mBean.getMotherboard());
     }
 
-    private void savePersonDetails() {
+    private void saveRegistrationDetails() {
         if (selectedRegBean == null) {
             return;
         }
@@ -350,6 +351,7 @@ public class SkunkWorkController {
         p.setPhonenumber(form.getPhoneInfo());
         p.setEmail(form.getEmailAddress());
         selectedRegBean.setTaskvalue(form.getSelectedTasks());
+        selectedRegBean.setActive(form.getActiveValue());
 
         try {
             regQuries.save(selectedRegBean);

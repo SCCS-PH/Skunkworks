@@ -37,11 +37,7 @@ public class RegistrationTableModel extends ActivatorAbstractTableModel<Registra
                         }
                         return (new SimpleDateFormat(DateUtilities.FORMAT_TYPE.MM_DD_YYYY_DASH.toString())).format(date);
                     case 1:
-                        String name = reg.getPersonid().getName();
-                        if (reg.getActive() != null && !reg.getActive()) {
-                            return name.concat("  **DENIED**");
-                        }
-                        return name;
+                        return reg.getPersonid().getName();
                     case 2:
                         return reg.getPersonid().getPhonenumber();
                     case 3:
@@ -77,7 +73,7 @@ public class RegistrationTableModel extends ActivatorAbstractTableModel<Registra
             getBold("Name"),
             getBold("Phone Number"),
             getBold("Email Address"),
-//            getBold("Product"),
+            //            getBold("Product"),
             getBold("Last Login")
         };
     }
@@ -89,7 +85,7 @@ public class RegistrationTableModel extends ActivatorAbstractTableModel<Registra
             String.class,
             String.class,
             String.class,
-//            String.class,
+            //            String.class,
             String.class
         };
     }

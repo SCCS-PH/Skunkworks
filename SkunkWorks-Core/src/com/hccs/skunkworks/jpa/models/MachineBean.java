@@ -57,6 +57,9 @@ public class MachineBean implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "machineid")
     private List<RegistrationBean> registrationBeanList;
 
+    @Column(name = "macaddress")
+    private String macaddress;
+
     public MachineBean() {
     }
 
@@ -118,6 +121,14 @@ public class MachineBean implements Serializable {
 
     public void setMotherboard(String motherboard) {
         this.motherboard = motherboard;
+    }
+
+    public String getMacaddress() {
+        return macaddress;
+    }
+
+    public void setMacaddress(String macaddress) {
+        this.macaddress = macaddress;
     }
 
     @XmlTransient

@@ -1,0 +1,1 @@
+ALTER TABLE machines ADD macaddress character varying(50);
