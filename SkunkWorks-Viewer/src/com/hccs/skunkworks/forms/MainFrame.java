@@ -289,6 +289,8 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         miExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        mnuSettings = new javax.swing.JMenu();
+        mnuCommands = new javax.swing.JMenuItem();
         miAbout = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -795,6 +797,13 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         mnuBar.add(jMenu2);
 
+        mnuSettings.setText("Settings");
+
+        mnuCommands.setText("Commands");
+        mnuSettings.add(mnuCommands);
+
+        mnuBar.add(mnuSettings);
+
         miAbout.setText("Help");
 
         jMenuItem1.setText("About");
@@ -883,6 +892,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu miAbout;
     private javax.swing.JMenuItem miExit;
     private javax.swing.JMenuBar mnuBar;
+    private javax.swing.JMenuItem mnuCommands;
+    private javax.swing.JMenu mnuSettings;
     private javax.swing.JPanel pnlExpiration;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlPlugins;

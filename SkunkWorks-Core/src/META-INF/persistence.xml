@@ -5,6 +5,7 @@
     <class>com.hccs.skunkworks.jpa.models.MachineBean</class>
     <class>com.hccs.skunkworks.jpa.models.PersonBean</class>
     <class>com.hccs.skunkworks.jpa.models.RegistrationBean</class>
+    <class>com.hccs.skunkworks.jpa.models.CommandBean</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-184-72-236-57.compute-1.amazonaws.com:5432/d8ja9cf4il3g2l?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
       <property name="javax.persistence.jdbc.user" value="vlfetuqjfwpdcm"/>
