@@ -1,28 +1,27 @@
-
 package com.hccs.skunkworks.jpa.controllers;
 
 /**
  *
  * @author DCSalenga
  */
-
 import com.hccs.skunkworks.jpa.models.CommandBean;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 
-
 public class CommandBeanJpaController implements Serializable {
+
     private EntityManagerFactory emf = null;
-    
-    public CommandBeanJpaController(EntityManagerFactory emf){
+
+    public CommandBeanJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-        public EntityManager getEntityManager() {
+
+    public EntityManager getEntityManager() {
         if (emf != null) {
             emf.getCache().evictAll();
         }

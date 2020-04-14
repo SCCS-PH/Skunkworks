@@ -33,6 +33,8 @@ public class CommandTableModel extends ActivatorAbstractTableModel<CommandBean> 
                         return reg.getExtension();
                     case 2:
                         return reg.getDescription();
+                    case 3:
+                        return reg.getActive();
                 }
             }
         }
@@ -48,13 +50,15 @@ public class CommandTableModel extends ActivatorAbstractTableModel<CommandBean> 
         return new String[]{
             getBold("Name"),
             getBold("Extension"),
-            getBold("Description")
+            getBold("Description"),
+            getBold("Active")
         };
     }
 
     @Override
     public Class[] getColumnTypes() {
         return new Class[]{
+            String.class,
             String.class,
             String.class,
             String.class
